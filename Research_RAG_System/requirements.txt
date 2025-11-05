@@ -1,0 +1,15 @@
+fastapi
+pydantic
+uvicorn 
+langchain
+langchain-openai
+langchain-chroma
+chromadb
+beautifulsoup4
+requests
+pydantic-settings
+python-dotenv
+playwright
+pytest
+langchain-text-splitters
+lxml

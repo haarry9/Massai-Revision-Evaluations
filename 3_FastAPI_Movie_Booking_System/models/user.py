@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, validator
 from typing import Optional
 
 class UserCreate(BaseModel):
@@ -6,6 +6,12 @@ class UserCreate(BaseModel):
     password: str
     name: str
     role: str = "user"
+    
+    @validator('password')
+    def password_length(cls, v):
+        if len(v.encode('utf-8')) > 72:
+            raise ValueError('password must be 72 bytes or less when encoded to utf-8')
+        return v
 
 class UserLogin(BaseModel):
     email: EmailStr

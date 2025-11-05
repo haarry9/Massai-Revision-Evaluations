@@ -7,7 +7,12 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from config import settings
 from models.user import TokenData
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto",
+    bcrypt__rounds=12,  # Adjust the number of rounds for better security
+    bcrypt__truncate_error=True  # Raise an error if password is too long
+)
 security = HTTPBearer()
 
 def hash_password(password: str) -> str:
